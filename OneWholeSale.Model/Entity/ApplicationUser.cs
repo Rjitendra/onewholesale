@@ -36,7 +36,7 @@
             this.IsEnabled = entity.IsEnabled;
             this.NormalizedUserName = entity.UserName.ToUpper();
             this.NormalizedEmail = entity.Email.ToUpper();
-            this.EmailConfirmed = true;
+            this.EmailConfirmed = false;
 
             if (!string.IsNullOrEmpty(entity.Password))
             {

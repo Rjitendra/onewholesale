@@ -9,20 +9,20 @@
     }
   },
   "profiles": {
-    "OneWholeSale.API": {
-      "commandName": "Project",
+    "IIS Express": {
+      "commandName": "IISExpress",
       "dotnetRunMessages": true,
       "launchBrowser": true,
-      "launchUrl": "weatherforecast",
-      "applicationUrl": "https://localhost:7197;http://localhost:5050",
+      //"applicationUrl": "http://localhost:5069",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "IIS Express": {
-      "commandName": "IISExpress",
+    "OneWholeSale.API": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
       "launchBrowser": true,
-      "launchUrl": "weatherforecast",
+      "applicationUrl": "https://localhost:6000;http://localhost:6001",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

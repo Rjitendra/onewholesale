@@ -7,10 +7,11 @@
             {
                 // NOTE: These names must match exactly with the names in the database.
                 { ApplicationUserRole.None, "None" },
-                { ApplicationUserRole.SysAdmin, "System Admin" },
                 { ApplicationUserRole.Admin, "Admin" },
-                { ApplicationUserRole.StoreAdmin, "Store Admin" },
-                { ApplicationUserRole.StoreUser, "Store User" }
+                { ApplicationUserRole.FulfillmentCenter, "FulfillmentCenter" },
+                { ApplicationUserRole.Partner, "Partner" },
+                { ApplicationUserRole.Kirana, "Kirana" },
+                { ApplicationUserRole.SalesPerson, "SalesPerson" }
             };
 
         public static IEnumerable<ApplicationUserRoleDto> GetApplicationUserRoles()

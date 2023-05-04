@@ -2,28 +2,16 @@
 {
     public enum ApplicationUserRole
     {
-        /// <summary>
-        /// Invalid.
-        /// </summary>
         None = 0,
 
-        /// <summary>
-        /// System Admin role
-        SysAdmin = 1,
+        Admin = 1,
 
-        /// <summary>
-        /// Admin role.
-        /// </summary>
-        Admin = 2,
+        FulfillmentCenter = 2,
 
-        /// <summary>
-        /// Store Admin
-        /// </summary>
-        StoreAdmin = 3,
+        Partner = 3,
 
-        /// <summary>
-        /// Store User
-        /// </summary>
-        StoreUser = 4
+        Kirana = 4,
+
+        SalesPerson= 5
     }
 }
