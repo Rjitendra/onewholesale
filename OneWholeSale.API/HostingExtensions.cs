@@ -115,16 +115,16 @@
             //  PopulateGlobalSettings(builder.Services);
             builder.Services.AddEndpointsApiExplorer();
 
-            builder.Services.AddControllers();
+          //  builder.Services.AddControllers();
             // Add Swagger services
             RegisterDocumentationGenerators(builder.Services);
 
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             builder.Services.AddControllers()
-        .AddNewtonsoftJson(options =>
-        {
-            options.SerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Utc;
-        });
+                .AddNewtonsoftJson(options =>
+                {
+                    options.SerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Utc;
+                });
             return builder.Build();
         }
 

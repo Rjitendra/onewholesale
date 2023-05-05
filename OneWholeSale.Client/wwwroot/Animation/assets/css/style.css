@@ -1,0 +1,347 @@
+/*------------------------------------------------------------------
+[Main Stylesheet]
+
+Project:    LOGDY
+Version:    1.1.0
+-------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------
+[Table of contents]
+    *. Login Layout 1 / .login-1
+    *. Login Layout 2 / .login-2
+    *. Login Layout 3 / .login-3
+    *. Login Layout 4 / .login-11
+    *. Login Layout 5 / .login-5
+    *. Login Layout 6 / .login-17
+    *. Login Layout 7 / .login-7
+    *. Login Layout 8 / .login-8
+    *. Login Layout 9 / .login-4
+    *. Login Layout 10 / .login-10
+    *. Login Layout 11 / .login-19
+    *. Login Layout 12 / .login-12
+    *. Login Layout 13 / .login-27
+    *. Login Layout 14 / .login-33
+    *. Login Layout 15 / .login-22
+    *. Login Layout 16 / .login-16
+    *. Login Layout 17 / .login-13
+    *. Login Layout 18 / .login-21
+    *. Login Layout 19 / .login-37
+    *. Login Layout 20 / .login-20
+    *. Login Layout 21 / .login-36
+    *. Login Layout 22 / .login-35
+    *. Login Layout 23 / .login-23
+    *. Login Layout 47 / .login-30
+    *. Login Layout 25 / .login-25
+    *. Login Layout 26 / .login-38
+    *. Login Layout 27 / .login-26
+    *. Login Layout 28 / .login-28
+    *. Login Layout 29 / .login-29
+    *. Login Layout 30 / .login-31
+    *. Login Layout 31 / .login-24
+    *. Login Layout 32 / .login-32
+    *. Login Layout 33 / .login-39
+    *. Login Layout 34 / .login-34
+    *. Login Layout 35 / .login-40
+    *. Login inner form / .login-inner-form
+    *. Login inner form details / .details
+-------------------------------------------------------------------*/
+/** GLOBAL CLASSES **/
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    color: #535353;
+}
+
+.img-fluid {
+    max-width: 100% !important;
+    height: auto;
+}
+
+.form-control:focus {
+    box-shadow: none;
+}
+
+
+
+/** Login 25 start **/
+.login-25 .login-inner-form .col-pad-0{
+    padding: 0;
+}
+
+.login-25 .bg-img{
+    background-size: cover;
+    top: 0;
+    width: 100%;
+    background: #1c1b48;
+    bottom: 0;
+    min-height: 100vh;
+    z-index: 999;
+    opacity: 1;
+    position: relative;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    align-items: center;
+    padding: 30px 80px;
+}
+
+.login-25 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: 'Jost', sans-serif;
+}
+
+.login-25 .bg-color-7{
+    top: 0;
+    width: 100%;
+    bottom: 0;
+    opacity: 1;
+    min-height: 100vh;
+    text-align: center;
+    position: relative;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 80px;
+}
+
+.login-25 .login-inner-form{
+    width: 100%;
+}
+
+.login-25 .btn-theme {
+    border-radius: 3px;
+    padding: 12px 50px 11px 50px;
+    color: #00a875;
+    border: solid 2px #00a875;
+    font-size: 17px;
+    font-family: 'Jost', sans-serif;
+    font-weight: 400;
+    float: left;
+    margin-right: 5px;
+}
+
+.login-25 .btn-theme:hover{
+    color: #fff;
+    background: #00a875;
+    border: solid 2px #00a875;
+    text-decoration: none;
+}
+
+.login-25 .login-inner-form.form-2{
+    margin: 10% auto 30px;
+}
+
+.login-25 .login-inner-form .forgot{
+    line-height: 50px;
+    float: right;
+    color: #717171;
+    font-size: 16px;
+}
+
+.login-25 .login-inner-form p{
+    color: #717171;
+    margin-bottom: 0;
+    font-size: 16px;
+}
+
+.login-25 .login-inner-form p a{
+    color: #717171;
+    font-weight: 500;
+}
+.login-25 .login-inner-form .thembo{
+    margin-left: 4px;
+}
+
+.login-25 .login-inner-form h3 {
+    margin: 0 0 50px;
+    font-size: 30px;
+    font-weight: 400;
+    color: #313131;
+}
+
+.login-25 .login-inner-form .form-group {
+    margin-bottom: 40px;
+}
+
+.login-25 .login-inner-form .input-text {
+    width: 100%;
+    padding: 0 0 10px;
+    font-size: 16px;
+    font-weight: 400;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid #e8e7e7;
+    outline: none;
+    color: #717171;
+}
+
+.login-25 .login-inner-form .checkbox {
+    padding-left: 0;
+    margin: 0 0 20px;
+    font-size: 14px;
+}
+
+.login-25 .login-inner-form .checkbox a {
+    font-size: 14px;
+}
+
+.login-25 .login-inner-form .checkbox .terms{
+    margin-left: 3px;
+}
+
+.login-25 .login-inner-form .btn-md {
+    cursor: pointer;
+    padding: 13px 50px 12px 50px;
+    font-size: 17px;
+    font-weight: 400;
+    border-radius: 3px;
+}
+
+.login-25 .login-inner-form input[type=checkbox], input[type=radio] {
+    margin-right: 3px;
+}
+
+.login-25 .login-inner-form button:focus {
+    outline: none;
+    outline: 0 auto -webkit-focus-ring-color;
+}
+
+.login-25 .login-inner-form .btn-theme.focus, .btn-theme:focus {
+    box-shadow: none;
+}
+
+.login-25 .login-inner-form .btn-theme {
+    background: #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    border: none;
+    color: #00a875;
+}
+
+.login-25 .login-inner-form .btn-theme:hover {
+    background: #fff;
+    box-shadow: 0 0 35px rgba(0, 0, 0, 0.2);
+}
+
+.login-25 .informeson {
+    color: #fff;
+    /* max-width: 500px; */
+    float: left;
+}
+
+.login-25 .informeson h3{
+    margin-bottom: 30px;
+    font-size: 40px;
+    color: #fff;
+}
+
+.login-25 .informeson h3 span{
+    color: #00a875;
+}
+
+.login-25 .informeson p{
+    margin-bottom: 40px;
+    font-size: 17px;
+    color: #d7d7d7;
+}
+
+.login-25 .social-box ul{
+    margin: 0;
+    padding: 0;
+}
+
+.login-25 .social-box .social-list li {
+    font-size: 16px;
+    display: inline-block;
+}
+
+.login-25 .social-box .social-list li a {
+    margin: 0 20px 2px 0;
+    font-size: 17px;
+    display: inline-block;
+    color: #bdbdbd;
+    text-decoration: none;
+}
+
+.login-25 .social-box .social-list li a:hover{
+    color: #fff;
+}
+
+.login-25 .social-box{
+    bottom: 40px;
+    position: absolute;
+    left: 65px;
+}
+
+.login-25 .none-2{
+    display: none;
+}
+
+.login-25 .logo{
+    top: 30px;
+    position: absolute;
+    left: 80px;
+}
+
+.login-25 .logo img{
+    height: 30px;
+}
+
+.login-25 .logo-2 {
+    display: none;
+    height: 40px;
+    margin-bottom: 15px;
+}
+
+/** MEDIA **/
+@media (max-width: 992px) {
+    .login-25 .none-2{
+        display: block;
+    }
+
+    .login-25 .none-2 img{
+        height: 35px;
+    }
+
+    .login-25 .login-inner-form h3 {
+        font-size: 25px;
+        margin: 0 0 40px;
+    }
+
+    .login-25 .login-inner-form{
+        max-width: 450px;
+        padding: 60px 30px;
+        background: #fff;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .none-992{
+        display: none!important;
+    }
+
+    .login-25 .bg-color-7 {
+        padding: 30px 15px;
+    }
+}
+/** Login 25 end **/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

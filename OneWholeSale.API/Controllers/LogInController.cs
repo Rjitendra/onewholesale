@@ -71,7 +71,7 @@
 
                 var authClaims = new List<Claim>()
                 {
-                      
+                       new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
                        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 };
 
