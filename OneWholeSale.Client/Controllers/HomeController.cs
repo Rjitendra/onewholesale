@@ -14,7 +14,7 @@ namespace OneWholeSale.Client.Controllers
         {
             _logger = logger;
         }
-
+        //jjj
         public IActionResult Index()
         {
             return View();
