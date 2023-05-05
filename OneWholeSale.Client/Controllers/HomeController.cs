@@ -33,7 +33,7 @@ namespace OneWholeSale.Client.Controllers
         [Authorize]
         public IActionResult Dashboard()
         {
-            bool s = HttpContext.User.Identity.IsAuthenticated;
+            
             return View();
         }
         public IActionResult Country()
