@@ -5,4 +5,20 @@
 }
 
 <h1>Dashboard</h1>
+<button onclick="testApiCall()">check ajax call</button>
 
+<script type="text/javascript">
+    function testApiCall(){
+        debugger;
+    $.ajax({
+            url: "/Account/GetAuthToken",
+        success: function (token) {
+            // Use the retrieved token
+            console.log(token);
+        },
+        error: function () {
+            console.error("Failed to retrieve AuthToken");
+        }
+    });
+    }
+</script>

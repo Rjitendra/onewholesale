@@ -1,16 +1,18 @@
-﻿using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Mvc;
-using OneWholeSale.Model.Dto.Login;
-using System.Security.Claims;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json;
-using System.Text;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Principal;
-
-namespace OneWholeSale.Client.Controllers.Account
+﻿namespace OneWholeSale.Client.Controllers.Account
 {
+    using Microsoft.AspNetCore.Authentication.Cookies;
+    using Microsoft.AspNetCore.Authentication;
+    using Microsoft.AspNetCore.Mvc;
+    using OneWholeSale.Model.Dto.Login;
+    using System.Security.Claims;
+    using Newtonsoft.Json.Linq;
+    using Newtonsoft.Json;
+    using System.Text;
+    using System.IdentityModel.Tokens.Jwt;
+    using System.Security.Principal;
+    using Microsoft.Extensions.Options;
+    using System.Net;
+
     public class AccountController : Controller
     {
         private readonly ILogger<AccountController> _logger;
@@ -19,8 +21,6 @@ namespace OneWholeSale.Client.Controllers.Account
         {
             _logger = logger;
         }
-
-
 
         [HttpGet]
         public async Task<IActionResult> Login()
@@ -76,10 +76,19 @@ namespace OneWholeSale.Client.Controllers.Account
 
                     await HttpContext.SignInAsync(
                      CookieAuthenticationDefaults.AuthenticationScheme,
-                     principal,
-                     authProperties);
+                    principal,
+                    authProperties);
 
-                    _logger.LogInformation("User {Email} logged in at {Time}.",
+                    // Create a new cookie and set its expiration date
+                    var options = new CookieOptions
+                    {
+                        Expires = DateTime.UtcNow.AddMinutes(30),
+                        HttpOnly = true,
+                        SameSite = SameSiteMode.Strict,
+                    };
+                    Response.Cookies.Append("token", token1, options);
+
+                   _logger.LogInformation("User {Email} logged in at {Time}.",
                         "jitendrabehera64@gmail.com", DateTime.UtcNow);
                     bool s = HttpContext.User.Identity.IsAuthenticated;
                     return RedirectToAction("Dashboard", "Home");
@@ -93,5 +102,18 @@ namespace OneWholeSale.Client.Controllers.Account
 
             return View(model);
         }
+
+        [HttpGet]
+        public IActionResult GetAuthToken()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                var token = HttpContext.Session.GetString("AuthToken");
+                return Ok(token);
+            }
+            return Unauthorized();
+        }
+
+
     }
 }

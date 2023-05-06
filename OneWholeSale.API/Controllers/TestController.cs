@@ -1,17 +1,17 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using OneWholeSale.Model.Dto.Login;
-
-namespace OneWholeSale.API.Controllers
+﻿namespace OneWholeSale.API.Controllers
 {
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class TestController : ControllerBase
     {
-        [HttpPost]
-        public async Task<IActionResult> Post()
+        [HttpGet]
+        public async Task<IActionResult> Get()
         {
-            return Ok();
+            return Ok("Jitendra");
         }
     }
 }
