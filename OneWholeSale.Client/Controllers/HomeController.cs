@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using OneWholeSale.Client.Models;
@@ -36,33 +38,46 @@ namespace OneWholeSale.Client.Controllers
         [Authorize]
         public async Task<IActionResult> Dashboard()
         {
-            var token = Request.Cookies["token"];
-            if (token != null) {
+            string accessToken=null;
+
+
+            if (User.Identity.IsAuthenticated)
+            {
+                var accessTokenClaim = User.FindFirst("access_token");
+                if (accessTokenClaim != null)
+                {
+                    accessToken = accessTokenClaim.Value;
+                    // use the access token in your API requests
+                }
+                else
+                {
+                    // access token not found
+                }
+            }
+
+
+
+            // retrieve the access token from the ClaimsPrincipal
+
+            if (accessToken != null)
+            {
 
                 // make the API request with the token
                 var client = new HttpClient();
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token+1);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
                 var response = await client.GetAsync("http://localhost:6001/api/Test");
                 // handle the response
                 if (response.IsSuccessStatusCode)
                 {
-                    // parse the response
-                    var content = await response.Content.ReadAsStringAsync();
-                  //  var result = JsonConvert.DeserializeObject<MyApiResponse>(content);
-
-                    // return a success result
-                   // return Json(new { success = true, data = result });
+                    
                 }
                 else if (response.StatusCode == HttpStatusCode.Unauthorized)
                 {
-                    // handle unauthorized error (e.g. redirect to login)
-                  //  return Json(new { success = false, error = "Unauthorized" });
+                    await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+                    return RedirectToAction("Login", "Account");
                 }
-                else
-                {
-                    // handle other errors
-                 //   return Json(new { success = false, error = "An error occurred" });
-                }
+
+
             }
             return View();
         }

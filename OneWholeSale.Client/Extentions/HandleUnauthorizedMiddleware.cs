@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Net;
 
 namespace OneWholeSale.Client.Extentions
@@ -16,13 +17,16 @@ namespace OneWholeSale.Client.Extentions
         {
             await _next(context);
 
-            if (context.Response.StatusCode == (int)HttpStatusCode.Unauthorized)
+            if (context.Response.StatusCode == (int)HttpStatusCode.Unauthorized && context.User.Identity.IsAuthenticated)
             {
-                await context.SignOutAsync();
-                // redirect to the login page
+                // Clear the existing authentication cookie
+                await context.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
+                // Redirect to the login page
                 context.Response.Redirect("/Account/Login");
             }
         }
     }
+
 
 }

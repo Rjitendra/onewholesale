@@ -65,7 +65,7 @@
 
                     var claims = new List<Claim>();
                     claims.AddRange(token.Claims);
-
+                    claims.Add(new Claim("access_token", token1));
                     var claimsIdentity = new ClaimsIdentity(
                            claims, CookieAuthenticationDefaults.AuthenticationScheme);
                     var principal = new ClaimsPrincipal(claimsIdentity);
@@ -79,18 +79,9 @@
                     principal,
                     authProperties);
 
-                    // Create a new cookie and set its expiration date
-                    var options = new CookieOptions
-                    {
-                        Expires = DateTime.UtcNow.AddMinutes(30),
-                        HttpOnly = true,
-                        SameSite = SameSiteMode.Strict,
-                    };
-                    Response.Cookies.Append("token", token1, options);
-
-                   _logger.LogInformation("User {Email} logged in at {Time}.",
-                        "jitendrabehera64@gmail.com", DateTime.UtcNow);
-                    bool s = HttpContext.User.Identity.IsAuthenticated;
+                    _logger.LogInformation("User {Email} logged in at {Time}.",
+                         "jitendrabehera64@gmail.com", DateTime.UtcNow);
+                    //bool s = HttpContext.User.Identity.IsAuthenticated;
                     return RedirectToAction("Dashboard", "Home");
 
                 }
@@ -102,6 +93,18 @@
 
             return View(model);
         }
+
+        /// <summary>
+        /// Show logout page
+        /// </summary>
+        [HttpGet]
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Login", "Account");
+        }
+
+
 
         [HttpGet]
         public IActionResult GetAuthToken()

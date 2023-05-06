@@ -8,11 +8,11 @@
     {
         public static WebApplication ConfigureServices(this WebApplicationBuilder builder)
         {
-            builder.Services.AddControllersWithViews(options =>
-            {
-                options.Filters.Add<HandleApiExceptionFilter>();
-            });
-
+            //builder.Services.AddControllersWithViews(options =>
+            //{
+            //    options.Filters.Add<HandleApiExceptionFilter>();
+            //});
+            builder.Services.AddControllersWithViews();
 
             builder.Services.AddMvc();
             builder.Services.AddSession();
@@ -56,7 +56,6 @@
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
-
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Account}/{action=Login}/{id?}");
