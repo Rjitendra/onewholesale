@@ -9,9 +9,6 @@
     using Newtonsoft.Json;
     using System.Text;
     using System.IdentityModel.Tokens.Jwt;
-    using System.Security.Principal;
-    using Microsoft.Extensions.Options;
-    using System.Net;
 
     public class AccountController : Controller
     {
@@ -24,7 +21,6 @@
 
         [HttpGet]
         public async Task<IActionResult> Login()
-
         {
             if (User.Identity.IsAuthenticated)
             {
@@ -81,7 +77,6 @@
 
                     _logger.LogInformation("User {Email} logged in at {Time}.",
                          "jitendrabehera64@gmail.com", DateTime.UtcNow);
-                    //bool s = HttpContext.User.Identity.IsAuthenticated;
                     return RedirectToAction("Dashboard", "Home");
 
                 }
@@ -103,16 +98,19 @@
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Login", "Account");
         }
-
-
-
         [HttpGet]
         public IActionResult GetAuthToken()
         {
+            string accessToken = null;
             if (User.Identity.IsAuthenticated)
             {
-                var token = HttpContext.Session.GetString("AuthToken");
-                return Ok(token);
+                var accessTokenClaim = User.FindFirst("access_token");
+                if (accessTokenClaim != null)
+                {
+                    accessToken = accessTokenClaim.Value;
+                    // use the access token in your API requests
+                }
+                return Ok(accessToken);
             }
             return Unauthorized();
         }

@@ -1,6 +1,5 @@
 ﻿namespace OneWholeSale.Client
 {
-    using Microsoft.AspNetCore.Authentication;
     using Microsoft.AspNetCore.Authentication.Cookies;
     using OneWholeSale.Client.Extentions;
 
@@ -8,10 +7,6 @@
     {
         public static WebApplication ConfigureServices(this WebApplicationBuilder builder)
         {
-            //builder.Services.AddControllersWithViews(options =>
-            //{
-            //    options.Filters.Add<HandleApiExceptionFilter>();
-            //});
             builder.Services.AddControllersWithViews();
 
             builder.Services.AddMvc();
@@ -28,16 +23,14 @@
                         });
             builder.Services.AddHttpContextAccessor();
 
-
-
             builder.Services.AddAuthorization(options =>
-            {
-                options.AddPolicy("AdminOnly", policy =>
-                {
-                    policy.RequireRole("Admin");
-                });
-            });
-
+                       {
+                           options.AddPolicy("AdminOnly", policy =>
+                           {
+                               policy.RequireRole("Admin");
+                           });
+                       });
+            builder.Services.AddTransient<UnauthorizedRequestHandler>();
             return builder.Build();
         }
         public static WebApplication ConfigurePipeline(this WebApplication app)
@@ -50,9 +43,6 @@
             // app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSession();
-            // add the middleware before UseRouting
-            app.UseMiddleware<HandleUnauthorizedMiddleware>();
-
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
