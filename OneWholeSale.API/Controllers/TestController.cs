@@ -11,7 +11,7 @@
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            return Ok("Jitendra");
+            return Ok(DateTime.UtcNow.ToString());
         }
     }
 }

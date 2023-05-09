@@ -1,6 +1,5 @@
 ﻿namespace OneWholeSale.Client
 {
-    using Microsoft.AspNetCore.Authentication;
     using Microsoft.AspNetCore.Authentication.Cookies;
     using OneWholeSale.Client.Extentions;
 
@@ -28,16 +27,14 @@
                         });
             builder.Services.AddHttpContextAccessor();
 
-
-
             builder.Services.AddAuthorization(options =>
-            {
-                options.AddPolicy("AdminOnly", policy =>
-                {
-                    policy.RequireRole("Admin");
-                });
-            });
-
+                       {
+                           options.AddPolicy("AdminOnly", policy =>
+                           {
+                               policy.RequireRole("Admin");
+                           });
+                       });
+            builder.Services.AddTransient<UnauthorizedRequestHandler>();
             return builder.Build();
         }
         public static WebApplication ConfigurePipeline(this WebApplication app)
@@ -78,7 +75,6 @@
             });
 
             app.UseAuthorization();
-
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Account}/{action=Login}/{id?}");

@@ -28,7 +28,6 @@
 
         public static WebApplication ConfigureServices(this WebApplicationBuilder builder)
         {
-            // builder.Services.AddApplicationInsightsTelemetry();
 
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
@@ -86,14 +85,17 @@
                     ValidateIssuerSigningKey = true,
                     ValidAudience = identityServerSettings.ValidAudience,
                     ValidIssuer = identityServerSettings.ValidIssuer,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(identityServerSettings.ApiSecret))
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(identityServerSettings.ApiSecret)),
+                    ClockSkew = TimeSpan.FromSeconds(0) 
                 };
             });
 
-            // configure services for injection
+            builder.Services.AddAuthorization();
+            //// configure services for injection
             builder.Services
                 .AddControllers()
                 .AddNewtonsoftJson();
+
 
             var defaultApiVersion = new ApiVersion(1, 0);
             var apiVersionReader = new HeaderApiVersionReader("api-version");
@@ -115,7 +117,7 @@
             //  PopulateGlobalSettings(builder.Services);
             builder.Services.AddEndpointsApiExplorer();
 
-          //  builder.Services.AddControllers();
+            //  builder.Services.AddControllers();
             // Add Swagger services
             RegisterDocumentationGenerators(builder.Services);
 
@@ -125,6 +127,8 @@
                 {
                     options.SerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Utc;
                 });
+
+
             return builder.Build();
         }
 
@@ -148,11 +152,11 @@
             app.UseRouting();
             app.UseStaticFiles();
             app.ConfigureExceptionHandler();
+
             //  app.UseHttpsRedirection();
             app.UseCors(CorsPolicy);
             app.UseAuthentication();
             app.UseAuthorization();
-
             app.ConfigureRedundantStatusCodePages(); // Provide JSON responses for standard response codes such as HTTP 401.
             app.UseHttpContextHelper(); // Helper to get Base URL anywhere in application
             InitializeRoles(app.Services).Wait();
