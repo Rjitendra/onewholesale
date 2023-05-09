@@ -86,7 +86,7 @@
                     ValidAudience = identityServerSettings.ValidAudience,
                     ValidIssuer = identityServerSettings.ValidIssuer,
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(identityServerSettings.ApiSecret)),
-                    ClockSkew = TimeSpan.FromSeconds(0) 
+                    ClockSkew = TimeSpan.FromSeconds(0)
                 };
             });
 
@@ -131,7 +131,6 @@
 
             return builder.Build();
         }
-
         public static WebApplication ConfigurePipeline(this WebApplication app)
         {
             if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
@@ -167,9 +166,6 @@
             });
             return app;
         }
-
-
-
         private static void RegisterDocumentationGenerators(IServiceCollection services)
         {
             services.AddSwaggerGen(options =>
@@ -209,7 +205,6 @@
                 options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
             });
         }
-
         private static async Task InitializeRoles(IServiceProvider serviceProvider)
         {
             using var scope = serviceProvider.CreateScope();

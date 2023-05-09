@@ -82,6 +82,7 @@
             return View();
 
         }
+        [Authorize]
         public IActionResult Country()
         {
             return View();

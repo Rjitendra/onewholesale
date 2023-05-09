@@ -9,6 +9,7 @@
     using Newtonsoft.Json;
     using System.Text;
     using System.IdentityModel.Tokens.Jwt;
+    using Microsoft.AspNetCore.Authorization;
 
     public class AccountController : Controller
     {
@@ -20,21 +21,34 @@
         }
 
         [HttpGet]
-        public async Task<IActionResult> Login()
+        public async Task<IActionResult> Login(string returnUrl)
         {
             if (User.Identity.IsAuthenticated)
             {
+                if (!string.IsNullOrEmpty(returnUrl))
+                {
+                    return Redirect(returnUrl);
+                }
                 return RedirectToAction("Dashboard", "Home");
             }
+           
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(loginDto model)
+        public async Task<IActionResult> Login(loginDto model, string returnUrl = null)
         {
             if (User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("Dashboard", "Home");
+                if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+                {
+                    return Redirect(returnUrl);
+                }
+                else
+                {
+                    return RedirectToAction("Dashboard", "Home");
+                }
+               
             }
 
             if (ModelState.IsValid)
@@ -89,15 +103,20 @@
             return View(model);
         }
 
-        /// <summary>
-        /// Show logout page
-        /// </summary>
         [HttpGet]
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Login", "Account");
         }
+
+        [HttpGet]
+        [Authorize]
+        public IActionResult AccessDenied()
+        {
+            return this.View();
+        }
+
         [HttpGet]
         public IActionResult GetAuthToken()
         {
