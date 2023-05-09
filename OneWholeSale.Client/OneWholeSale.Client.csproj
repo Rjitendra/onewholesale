@@ -17,4 +17,9 @@
     <ProjectReference Include="..\OneWholeSale.Model\OneWholeSale.Model.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Admin\" />
+    <Folder Include="Views\SalesPartner\" />
+  </ItemGroup>
+
 </Project>

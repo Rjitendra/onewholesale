@@ -1,0 +1,187 @@
+﻿@{
+	ViewData["Title"] = "PurchaseOrder";
+	Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Purchase Order Form</title>
+	<style>
+		table {
+			border-collapse: collapse;
+			width: 100%;
+			margin-bottom: 20px;
+		}
+
+		th, td {
+			padding: 10px;
+			text-align: left;
+			border-bottom: 1px solid #ddd;
+		}
+
+		th {
+			background-color: #f2f2f2;
+		}
+
+		h2 {
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<header>
+		<img src="[insert company logo url]" alt="Company Logo">
+		<address>
+			[insert company address]
+		</address>
+	</header>
+
+	<main>
+		<h2>Purchase Order Form</h2>
+		<p>Date: [insert date]</p>
+		<p>Purchase Order Number: [insert PO number]</p>
+
+		<table>
+			<thead>
+				<tr>
+					<th>Item No.</th>
+					<th>Vendor</th>
+					<th>Category</th>
+					<th>Sub-Category</th>
+					<th>OUM</th>
+					<th>Quantity</th>
+					<th>Unit Price</th>
+					<th>Total Price</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><input type="text" class="form-control" id="a1" /></td>
+					<td><input type="text" class="form-control" id="a2" /></td>
+					<td><input type="text" class="form-control" id="a3" /></td>
+					<td><input type="text" class="form-control" id="a4" /></td>
+					<td><input type="text" class="form-control" id="a5" /></td>
+					<td><input type="text" class="form-control" id="a6" /></td>
+					<td><input type="text" class="form-control" id="a7" /></td>
+					<td><input type="text" class="form-control" id="a8" readonly /></td>
+					<td><button type="button" class="btn btn-primary" id="add" onclick="addmore()">+</button></td>
+				</tr>
+			</tbody>
+			<tbody id="AssignList"></tbody>
+			<tfoot>
+
+				<tr>
+					<td colspan="7" style="text-align: right;">Subtotal:</td>
+					<td><input type="text" class="form-control" id="Subtotal" readonly /></td>
+				</tr>
+				<tr>
+					<td colspan="7" style="text-align: right;">Tax:</td>
+					<td><input type="text" class="form-control" id="tax" /></td>
+				</tr>
+				<tr>
+					<td colspan="7" style="text-align: right;">Shipping:</td>
+					<td><input type="text" class="form-control" id="shipping" /></td>
+				</tr>
+				<tr>
+					<td colspan="7" style="text-align: right;">Total:</td>
+					<td><input type="text" class="form-control" id="totalamount" readonly /></td>
+				</tr>
+
+			</tfoot>
+		</table>
+
+		<p>Payment Terms: [Insert Payment Terms]</p>
+		<p>Delivery Date: [Insert Expected Delivery Date]</p>
+		<p>Notes: [Insert any additional notes or instructions]</p>
+	</main>
+</body>
+</html>
+
+
+<link href="~/Animation/css/Autocomplete.css" rel="stylesheet" />
+<script src="~/Animation/assets/js/jquery-2.2.0.min.js"></script>
+<script src="~/Animation/js/jquery_Autocomplete.js"></script>
+<script>
+
+	function addmore() {
+		debugger;
+		var itemno = $("#a1").val();
+		var vendor = $("#a2").val();
+		var category = $("#a3").val();
+		var subcategory = $("#a4").val();
+		var OUM = $("#a5").val();
+		var quantity = $("#a6").val();
+		var unitprice = $("#a7").val();
+		var totalprice = $("#a8").val();
+
+		var data = '<tr>';
+		data += '<td><input type="hidden" name="itemno" value="' + itemno + '">' + itemno + '</td>';
+		data += '<td><input type="hidden" name="vendor" value="' + vendor + '">' + vendor + '</td>';
+		data += '<td><input type="hidden" name="category" value="' + category + '">' + category + '</td>';
+		data += '<td><input type="hidden" name="subcategory" value="' + subcategory + '">' + subcategory + '</td>';
+		data += '<td><input type="hidden" name="OUM" value="' + OUM + '">' + OUM + '</td>';
+		data += '<td><input type="hidden" name="quantity" value="' + quantity + '">' + quantity + '</td>';
+		data += '<td><input type="hidden" name="unitprice" value="' + unitprice + '">' + unitprice + '</td>';
+		data += '<td><input type="hidden" name="totalprice" class="amount" value="' + totalprice + '">' + totalprice + '</td>';
+		data += '<td><button class="btn btn-warning " onclick="removeRow(this)"><i class="fal fa-trash" "></i></button></td>';
+		data += '</tr>';
+
+		$("#AssignList").append(data);
+		var totalAmount = 0;
+		$(".amount").each(function () {
+			totalAmount += parseFloat($(this).val());
+		});
+
+		$("#Subtotal").val(totalAmount);
+	}
+
+	function removeRow(btn) {
+		debugger;
+		$(btn).closest("tr").remove();
+		var totalAmount = 0;
+		$(".amount").each(function () {
+			totalAmount += parseFloat($(this).val());
+		});
+
+		$("#Subtotal").val(totalAmount);
+	}
+
+
+</script>
+
+<script>
+	var textbox1 = $("#a6");
+	var textbox2 = $("#a7");
+	var resultbox = $("#a8");
+
+	function calculateSum() {
+		var value1 = Number(textbox1.val());
+		var value2 = Number(textbox2.val());
+
+		var sum = value1 * value2;
+		resultbox.val(sum);
+	}
+	textbox1.change(calculateSum);
+	textbox2.change(calculateSum);
+
+</script>
+<script>
+	var sub = $("#Subtotal");
+	var tax = $("#tax");
+	var ship = $("#shipping");
+	var resultbox2 = $("#totalamount");
+
+	function calculateSum2() {
+		var subnum = Number(sub.val());
+		var taxnum = Number(tax.val());
+		var shipnum = Number(ship.val());
+		var sum = subnum + taxnum + shipnum;
+		resultbox2.val(sum);
+	}
+
+	sub.change(calculateSum2);
+	tax.change(calculateSum2);
+	ship.change(calculateSum2);
+
+</script>
