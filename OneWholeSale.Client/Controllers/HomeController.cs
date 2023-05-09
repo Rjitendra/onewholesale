@@ -36,8 +36,8 @@
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-        [Authorize]
-        public async Task<IActionResult> Dashboard()
+		[Authorize(Policy = "AdminOnly")]
+		public async Task<IActionResult> Dashboard()
         {
             string accessToken = null;
 
@@ -82,57 +82,10 @@
             return View();
 
         }
-        [Authorize]
-        public IActionResult Country()
-        {
-            return View();
-        }
+     
+       
 
-        public IActionResult State()
-        {
-            return View();
-        }
-        public IActionResult District()
-        {
-            return View();
-        }
-        public IActionResult SalesPersonDetails()
-        {
-            return View();
-        }
-
-        public IActionResult FulfilmentCenter()
-        {
-            return View();
-        }
-
-        public IActionResult Partner()
-        {
-            return View();
-        }
-        public IActionResult KiranaMaster()
-        {
-            return View();
-        }
-        public IActionResult VendorMaster()
-        {
-            return View();
-        }
-        public IActionResult VendorContactPerson()
-        {
-            return View();
-        }
-        public IActionResult VendorCategory()
-        {
-            return View();
-        }
-        public IActionResult VendorSubCategory()
-        {
-            return View();
-        }
-        public IActionResult Product()
-        {
-            return View();
-        }
+      
+       
     }
 }

@@ -1,0 +1,134 @@
+﻿@{
+	ViewData["Title"] = "PurchaseOrderInvoice";
+	Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Invoice</title>
+	<style>
+		table {
+			border-collapse: collapse;
+			width: 100%;
+		}
+
+		th, td {
+			padding: 10px;
+			text-align: left;
+		}
+
+		th {
+			background-color: #f2f2f2;
+		}
+
+		h1, h2 {
+			text-align: center;
+		}
+
+		#company-info {
+			float: left;
+			width: 50%;
+		}
+
+		#invoice-info {
+			float: right;
+			width: 50%;
+			text-align: right;
+		}
+
+		.clearfix::after {
+			content: "";
+			clear: both;
+			display: table;
+		}
+
+		#customer-info {
+			margin-top: 20px;
+		}
+
+		#item-table {
+			margin-top: 20px;
+		}
+
+			#item-table img {
+				max-width: 100px;
+				max-height: 100px;
+				padding: 5px;
+				border: 1px solid #ddd;
+				border-radius: 5px;
+				box-shadow: 0px 0px 5px #ddd;
+			}
+
+		#notes {
+			margin-top: 20px;
+		}
+
+		#terms {
+			margin-top: 20px;
+		}
+	</style>
+</head>
+<body>
+	<header>
+		<img src="[Insert Company Logo URL]" alt="Company Logo">
+		<h1>INVOICE</h1>
+		<div class="clearfix">
+			<div id="company-info">
+				<h2>[Company Name]</h2>
+				<p>[Company Address]</p>
+				<p>[City, State Zip Code]</p>
+				<p>Phone: [Company Phone Number]</p>
+				<p>Email: [Company Email Address]</p>
+			</div>
+			<div id="invoice-info">
+				<p>Invoice Number: [Insert Invoice Number]</p>
+				<p>Date: [Insert Invoice Date]</p>
+				<p>Due Date: [Insert Invoice Due Date]</p>
+				<p>Payment Terms: [Insert Payment Terms]</p>
+				<p>Payment Method: [Insert Payment Method]</p>
+			</div>
+		</div>
+		<div id="customer-info">
+			<h3>Bill To:</h3>
+			<p>[Customer Name]</p>
+			<p>[Customer Address]</p>
+			<p>[City, State Zip Code]</p>
+			<p>Phone: [Customer Phone Number]</p>
+			<p>Email: [Customer Email Address]</p>
+		</div>
+	</header>
+
+	<main>
+		<table id="item-table">
+			<thead>
+				<tr>
+					<th>Item</th>
+					<th>Description</th>
+					<th>Quantity</th>
+					<th>Unit Price</th>
+					<th>Discount</th>
+					<th>Tax</th>
+					<th>Total</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><img src="[Insert Product A Image URL]" alt="[Product A Name]"></td>
+					<td>[Product A Name]<br>[Product A Number or Code]</td>
+					<td>[Product A Quantity]</td>
+					<td>$[Product A Unit Price]</td>
+					<td>$[Product A Discount]</td>
+					<td></td>
+					<td></td>
+			</tbody>
+		</table>
+	</main>
+
+	<footer>
+		@*<p>Thank you for your business!</p>*@
+	</footer>
+</body>
+</html>
+
+
+
