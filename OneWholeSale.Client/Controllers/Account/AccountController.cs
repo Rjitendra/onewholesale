@@ -21,14 +21,14 @@
         }
 
         [HttpGet]
-        public async Task<IActionResult> Login(string returnUrl)
+        public async Task<IActionResult> Login()
         {
             if (User.Identity.IsAuthenticated)
             {
-                if (!string.IsNullOrEmpty(returnUrl))
-                {
-                    return Redirect(returnUrl);
-                }
+                //if (!string.IsNullOrEmpty(returnUrl))
+                //{
+                //    return Redirect(returnUrl);
+                //}
                 return RedirectToAction("Dashboard", "Home");
             }
            
@@ -36,18 +36,18 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(loginDto model, string returnUrl = null)
+        public async Task<IActionResult> Login(loginDto model)
         {
             if (User.Identity.IsAuthenticated)
             {
-                if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
-                {
-                    return Redirect(returnUrl);
-                }
-                else
-                {
-                    return RedirectToAction("Dashboard", "Home");
-                }
+                //if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+                //{
+                //    return Redirect(returnUrl);
+                //}
+                //else
+                //{
+                   // return RedirectToAction("Dashboard", "Home");
+               // }
                
             }
 

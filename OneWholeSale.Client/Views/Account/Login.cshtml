@@ -46,8 +46,7 @@
                         <div class="details">
 
                             <form action="/Account/Login" method="post" >
-                                <input type="hidden" name="returnUrl" value="@Request.Query["returnUrl"]" />
-                                <!-- <h3>Sign Into Your Account</h3> -->
+                             
                                 <h3>Login</h3>
                                 @{
                                     string confirmMessage = Convert.ToString(TempData["Message"]); string warningMessage = Convert.ToString(TempData["WarningMessage"]);

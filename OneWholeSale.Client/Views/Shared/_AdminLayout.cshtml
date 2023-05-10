@@ -1,7 +1,10 @@
 ﻿@using Microsoft.AspNetCore.Http
-@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@using OneWholeSale.Model.Utility
+@inject IHttpContextAccessor HttpContextAccessor
 @{
     Layout = null;
+      var roleName = HttpContextAccessor.HttpContext.User.FindFirst(ApplicationClaims.RoleName)?.Value;
+    string s = "jitu";
 }
 
 <!DOCTYPE html>
@@ -145,39 +148,61 @@
                             <div class="menu-title">Dashboard</div>
                         </a>
                     </li>
-                    <li>
+                        <li>
+                            @{
+                                if (roleName.ToString()=="Admin")
+                                {
+                                    <a href="javascript:" title="Application Intel" data-filter-tags="application intel" id="container">
+                                        <span class="nav-link-text" data-i18n="nav.application_intel">Master</span>
+                                        <div class="list-icon"><i id="icon" class="fa fa-angle-down" aria-hidden="true"></i></div>
+                                    </a>
+                                    <ul>
+                                       
+                                        <li>
+                                            <a href="/Home/SalesPersonDetails"><i class="bx bx-right-arrow-alt"></i>Sales Person Details</a>
+                                        </li>
+                                        <li>
+                                            <a href="/Home/FulfilmentCenter"><i class="bx bx-right-arrow-alt"></i>Fulfilment Center</a>
+                                        </li>
+                                       
+                                    </ul>
+                                }
+                            }
+                        </li>
+                       @* <li>
 
-                        <a href="javascript:" title="Application Intel" data-filter-tags="application intel" id="container">
-                            <span class="nav-link-text" data-i18n="nav.application_intel">Master</span>
-                            <div class="list-icon"><i id="icon" class="fa fa-angle-down" aria-hidden="true"></i></div>
-                        </a>
-                        <ul>
-                            <li>
-                                <a href="/Home/Country"><i class="bx bx-right-arrow-alt"></i>Country</a>
-                            </li>
-                            <li>
-                                <a href="/Home/State"><i class="bx bx-right-arrow-alt"></i>State</a>
-                            </li>
-                            <li>
-                                <a href="/Home/District"><i class="bx bx-right-arrow-alt"></i>District</a>
-                            </li>
-                            <li>
-                                <a href="/Home/SalesPersonDetails"><i class="bx bx-right-arrow-alt"></i>Sales Person Details</a>
-                            </li>
-                            <li>
-                                <a href="/Home/FulfilmentCenter"><i class="bx bx-right-arrow-alt"></i>Fulfilment Center</a>
-                            </li>
-                            <li>
-                               <a href="/Home/Partner"><i class="bx bx-right-arrow-alt"></i>Partner</a>
-                            </li>
-                             <li>
-                               <a href="/Home/KiranaMaster"><i class="bx bx-right-arrow-alt"></i>Kirana Master</a>
-                            </li>
-                            <li>
-                               <a href="/Home/VendorMaster"><i class="bx bx-right-arrow-alt"></i>Vendor Master</a>
-                            </li>
-                        </ul>
-                    </li>
+                            <a href="javascript:" title="Application Intel" data-filter-tags="application intel" id="container">
+                                <span class="nav-link-text" data-i18n="nav.application_intel">Master</span>
+                                <div class="list-icon"><i id="icon" class="fa fa-angle-down" aria-hidden="true"></i></div>
+                            </a>
+                            <ul>
+                                <li>
+                                    <a href="/Home/Country"><i class="bx bx-right-arrow-alt"></i>Country</a>
+                                </li>
+                                <li>
+                                    <a href="/Home/State"><i class="bx bx-right-arrow-alt"></i>State</a>
+                                </li>
+                                <li>
+                                    <a href="/Home/District"><i class="bx bx-right-arrow-alt"></i>District</a>
+                                </li>
+                                <li>
+                                    <a href="/Home/SalesPersonDetails"><i class="bx bx-right-arrow-alt"></i>Sales Person Details</a>
+                                </li>
+                                <li>
+                                    <a href="/Home/FulfilmentCenter"><i class="bx bx-right-arrow-alt"></i>Fulfilment Center</a>
+                                </li>
+                                <li>
+                                    <a href="/Home/Partner"><i class="bx bx-right-arrow-alt"></i>Partner</a>
+                                </li>
+                                <li>
+                                    <a href="/Home/KiranaMaster"><i class="bx bx-right-arrow-alt"></i>Kirana Master</a>
+                                </li>
+                                <li>
+                                    <a href="/Home/VendorMaster"><i class="bx bx-right-arrow-alt"></i>Vendor Master</a>
+                                </li>
+                            </ul>
+                        </li>*@
+
                     <li>
                         <a href="javascript:" title="Application Intel" data-filter-tags="application intel" id="container">
                             <span class="nav-link-text" data-i18n="nav.application_intel">Vendor</span>

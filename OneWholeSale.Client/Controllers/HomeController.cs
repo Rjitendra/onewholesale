@@ -6,10 +6,8 @@
     using System.Diagnostics;
     using System.Net.Http.Headers;
     using OneWholeSale.Client.Extentions;
-    using NuGet.Common;
-    using Microsoft.IdentityModel.Tokens;
-    using Newtonsoft.Json.Linq;
     using System.IdentityModel.Tokens.Jwt;
+   
 
     public class HomeController : Controller
     {
@@ -36,8 +34,8 @@
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-		[Authorize(Policy = "AdminOnly")]
-		public async Task<IActionResult> Dashboard()
+        [Authorize(Policy = "AdminOnly")]
+        public async Task<IActionResult> Dashboard()
         {
             string accessToken = null;
 
@@ -51,8 +49,7 @@
                     // use the access token in your API requests
                     var tokenHandler = new JwtSecurityTokenHandler();
                     var token = tokenHandler.ReadJwtToken(accessToken);
-                    var expiration = token.ValidTo;
-                    var currentUtcTime = DateTime.UtcNow;
+                    
                 }
                 else
                 {
@@ -82,10 +79,5 @@
             return View();
 
         }
-     
-       
-
-      
-       
     }
 }
