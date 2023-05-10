@@ -1,0 +1,66 @@
+﻿
+@{
+    ViewData["Title"] = "DeliveryStatus";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+	<style>
+		table {
+			border-collapse: collapse;
+			width: 100%;
+		}
+
+		th, td {
+			padding: 8px;
+			text-align: left;
+			border-bottom: 1px solid #ddd;
+		}
+
+		tr:hover {
+			background-color: #f5f5f5;
+		}
+
+		th {
+			background-color: #4CAF50;
+			color: white;
+		}
+	</style>
+
+	<h1>Delivery Status</h1>
+
+	<table>
+		<tr>
+			<th>Order Number</th>
+			<th>Customer Name</th>
+			<th>Order Date</th>
+			<th>Expected Delivery Date</th>
+			<th>Actual Delivery Date</th>
+			<th>Status</th>
+		</tr>
+		<tr>
+			<td>ORD12345</td>
+			<td>John Smith</td>
+			<td>2023-05-01</td>
+			<td>2023-05-10</td>
+			<td>2023-05-10</td>
+			<td>Delivered</td>
+		</tr>
+		<tr>
+			<td>ORD12346</td>
+			<td>Jane Doe</td>
+			<td>2023-04-30</td>
+			<td>2023-05-05</td>
+			<td>2023-05-07</td>
+			<td>Delayed</td>
+		</tr>
+		<tr>
+			<td>ORD12347</td>
+			<td>Bob Johnson</td>
+			<td>2023-05-02</td>
+			<td>2023-05-10</td>
+			<td>-</td>
+			<td>Processing</td>
+		</tr>
+	</table>
+

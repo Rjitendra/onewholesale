@@ -1,8 +1,8 @@
 ﻿@using Microsoft.AspNetCore.Http
 @inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
-@{
-    Layout = null;
-}
+@using System.Security.Claims
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -107,6 +107,9 @@
             localStorage.setItem("themeSettings", "");
         }
     </script>
+   @* @{
+        var roles = ((ClaimsIdentity)HttpContextAccessor.HttpContext.User.Identity).Claims.Where(c => c.Type == ClaimTypes.Role).Select(c => c.Value);
+    }*@
     <div class="page-wrapper">
         <div class="page-inner">
             <aside class="page-sidebar">
@@ -145,7 +148,8 @@
                             <div class="menu-title">Dashboard</div>
                         </a>
                     </li>
-                    <li>
+                        
+                            <li>
 
                         <a href="javascript:" title="Application Intel" data-filter-tags="application intel" id="container">
                             <span class="nav-link-text" data-i18n="nav.application_intel">Master</span>
@@ -178,6 +182,7 @@
                             </li>
                         </ul>
                     </li>
+                    
                     <li>
                         <a href="javascript:" title="Application Intel" data-filter-tags="application intel" id="container">
                             <span class="nav-link-text" data-i18n="nav.application_intel">Vendor</span>

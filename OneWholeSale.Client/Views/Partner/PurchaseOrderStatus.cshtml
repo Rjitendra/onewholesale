@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewData["Title"] = "PurchaseOrderStatus";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+	<style>
+		table {
+			border-collapse: collapse;
+			width: 100%;
+		}
+
+		th, td {
+			padding: 8px;
+			text-align: left;
+			border-bottom: 1px solid #ddd;
+		}
+
+		tr:hover {
+			background-color: #f5f5f5;
+		}
+
+		th {
+			background-color: #4CAF50;
+			color: white;
+		}
+	</style>
+
+	<h1>Purchase Order Status</h1>
+
+	<table>
+		<tr>
+			<th>PO Number</th>
+			<th>Supplier Name</th>
+			<th>Order Date</th>
+			<th>Expected Delivery Date</th>
+			<th>Status</th>
+		</tr>
+		<tr>
+			<td>PO12345</td>
+			<td>ABC Company</td>
+			<td>2023-05-01</td>
+			<td>2023-05-15</td>
+			<td>Shipped</td>
+		</tr>
+		<tr>
+			<td>PO12346</td>
+			<td>XYZ Inc.</td>
+			<td>2023-04-30</td>
+			<td>2023-05-14</td>
+			<td>In Transit</td>
+		</tr>
+		<tr>
+			<td>PO12347</td>
+			<td>PQR Ltd.</td>
+			<td>2023-05-02</td>
+			<td>2023-05-16</td>
+			<td>Pending</td>
+		</tr>
+	</table>
+
+
+

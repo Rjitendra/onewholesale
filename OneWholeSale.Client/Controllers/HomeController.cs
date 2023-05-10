@@ -36,7 +36,7 @@
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-		[Authorize(Policy = "AdminOnly")]
+		//[Authorize(Policy = "AdminOnly")]
 		public async Task<IActionResult> Dashboard()
         {
             string accessToken = null;

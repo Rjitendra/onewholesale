@@ -20,6 +20,13 @@ namespace OneWholeSale.Client.Controllers.FulfillmentCenter
 		{
 			return View();
 		}
-
+		public IActionResult Ordertrack()
+		{
+			return View();
+		}
+		public IActionResult FulStockAvaialbe()
+		{
+			return View();
+		}
 	}
 }

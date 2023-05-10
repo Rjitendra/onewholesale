@@ -36,18 +36,18 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(loginDto model, string returnUrl = null)
+        public async Task<IActionResult> Login(loginDto model)
         {
             if (User.Identity.IsAuthenticated)
             {
-                if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
-                {
-                    return Redirect(returnUrl);
-                }
-                else
-                {
-                    return RedirectToAction("Dashboard", "Home");
-                }
+                //if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+                //{
+                //    return Redirect(returnUrl);
+                //}
+                //else
+                //{
+                //    return RedirectToAction("Dashboard", "Home");
+                //}
                
             }
 
