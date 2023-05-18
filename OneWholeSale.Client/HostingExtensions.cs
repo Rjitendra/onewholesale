@@ -2,6 +2,7 @@
 {
     using Microsoft.AspNetCore.Authentication.Cookies;
     using OneWholeSale.Client.Extentions;
+    using OneWholeSale.Model.Utility;
 
     public static class HostingExtensions
     {
@@ -26,7 +27,7 @@
                        {
                            options.AddPolicy("AdminOnly", policy =>
                            {
-                               policy.RequireRole("Admin");
+                               policy.RequireClaim(ApplicationClaims.RoleName, "Admin");
                            });
                        });
             builder.Services.AddTransient<UnauthorizedRequestHandler>();

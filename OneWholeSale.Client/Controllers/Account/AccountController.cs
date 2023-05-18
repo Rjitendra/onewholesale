@@ -21,14 +21,14 @@
         }
 
         [HttpGet]
-        public async Task<IActionResult> Login(string returnUrl)
+        public async Task<IActionResult> Login()
         {
             if (User.Identity.IsAuthenticated)
             {
-                if (!string.IsNullOrEmpty(returnUrl))
-                {
-                    return Redirect(returnUrl);
-                }
+                //if (!string.IsNullOrEmpty(returnUrl))
+                //{
+                //    return Redirect(returnUrl);
+                //}
                 return RedirectToAction("Dashboard", "Home");
             }
            

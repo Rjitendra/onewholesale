@@ -1,15 +1,18 @@
 ﻿@using Microsoft.AspNetCore.Http
-@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
-@using System.Security.Claims
-
-
+@using OneWholeSale.Model.Utility
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    Layout = null;
+      var roleName = HttpContextAccessor.HttpContext.User.FindFirst(ApplicationClaims.RoleName)?.Value;
+    string s = "jitu";
+}
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <title>
-        One ERP
+        One WholeSale ERP
     </title>
     <!-- <base href="" /> -->
     <meta name="description" content="Welcome">
@@ -143,46 +146,33 @@
                         </a>
                     </div> -->
                     <ul id="js-nav-menu" class="nav-menu">
+                        @{
+                                if (roleName.ToString()=="Admin")
+                                {
                     <li>
                         <a href="/Home/Dashboard">
                             <div class="menu-title">Dashboard</div>
                         </a>
                     </li>
-                        
-                            <li>
-
-                        <a href="javascript:" title="Application Intel" data-filter-tags="application intel" id="container">
-                            <span class="nav-link-text" data-i18n="nav.application_intel">Master</span>
-                            <div class="list-icon"><i id="icon" class="fa fa-angle-down" aria-hidden="true"></i></div>
-                        </a>
-                        <ul>
-                            <li>
-                                <a href="/Home/Country"><i class="bx bx-right-arrow-alt"></i>Country</a>
-                            </li>
-                            <li>
-                                <a href="/Home/State"><i class="bx bx-right-arrow-alt"></i>State</a>
-                            </li>
-                            <li>
-                                <a href="/Home/District"><i class="bx bx-right-arrow-alt"></i>District</a>
-                            </li>
-                            <li>
-                                <a href="/Home/SalesPersonDetails"><i class="bx bx-right-arrow-alt"></i>Sales Person Details</a>
-                            </li>
-                            <li>
-                                <a href="/Home/FulfilmentCenter"><i class="bx bx-right-arrow-alt"></i>Fulfilment Center</a>
-                            </li>
-                            <li>
-                               <a href="/Home/Partner"><i class="bx bx-right-arrow-alt"></i>Partner</a>
-                            </li>
-                             <li>
-                               <a href="/Home/KiranaMaster"><i class="bx bx-right-arrow-alt"></i>Kirana Master</a>
-                            </li>
-                            <li>
-                               <a href="/Home/VendorMaster"><i class="bx bx-right-arrow-alt"></i>Vendor Master</a>
-                            </li>
-                        </ul>
-                    </li>
-                    
+                        <li>
+                            
+                                    <a href="javascript:" title="Application Intel" data-filter-tags="application intel" id="container">
+                                        <span class="nav-link-text" data-i18n="nav.application_intel">Master</span>
+                                        <div class="list-icon"><i id="icon" class="fa fa-angle-down" aria-hidden="true"></i></div>
+                                    </a>
+                                    <ul>
+                                       
+                                        <li>
+                                            <a href="/Admin/SalesPersonDetails"><i class="bx bx-right-arrow-alt"></i>Sales Person Details</a>
+                                        </li>
+                                        <li>
+                                            <a href="/Admin/FulfilmentCenter"><i class="bx bx-right-arrow-alt"></i>Fulfilment Center</a>
+                                        </li>
+                                       
+                                    </ul>
+                           
+                        </li>
+                      
                     <li>
                         <a href="javascript:" title="Application Intel" data-filter-tags="application intel" id="container">
                             <span class="nav-link-text" data-i18n="nav.application_intel">Vendor</span>
@@ -190,20 +180,76 @@
                         </a>
                         <ul>
                             <li>
-                                <a href="/Home/VendorContactPerson"><i class="bx bx-right-arrow-alt"></i>Contact Person</a>
+                                    <a href="/Admin/VendorContactPerson"><i class="bx bx-right-arrow-alt"></i>Contact Person</a>
                             </li>
                             <li>
-                                <a href="/Home/VendorCategory"><i class="bx bx-right-arrow-alt"></i>Category</a>
+                                <a href="/Admin/VendorCategory"><i class="bx bx-right-arrow-alt"></i>Category</a>
                             </li>
                             <li>
-                                <a href="/Home/VendorSubCategory"><i class="bx bx-right-arrow-alt"></i>Sub-Category</a>
+                                    <a href="/Admin/VendorSubCategory"><i class="bx bx-right-arrow-alt"></i>Sub-Category</a>
                             </li>
                             <li>
-                                    <a href="/Home/Product"><i class="bx bx-right-arrow-alt"></i>Product</a>
+                                    <a href="/Admin/Product"><i class="bx bx-right-arrow-alt"></i>Product</a>
                             </li>
                         </ul>
                     </li>
-                    
+                            }
+                        }
+                        @{
+                            else if (roleName.ToString() == "FulfillmentCenter")
+                            {
+                                <li>
+                                    <a href="/Home/Dashboard">
+                                        <div class="menu-title">Dashboard</div>
+                                    </a>
+                                </li>
+                                <li>
+
+                                    <a href="javascript:" title="Application Intel" data-filter-tags="application intel" id="container">
+                                        <span class="nav-link-text" data-i18n="nav.application_intel">Purchase Order</span>
+                                        <div class="list-icon"><i id="icon" class="fa fa-angle-down" aria-hidden="true"></i></div>
+                                    </a>
+                                    <ul>
+
+                                        <li>
+                                            <a href="/Fulfillment/PurchaseOrder"><i class="bx bx-right-arrow-alt"></i>Po Create</a>
+                                        </li>
+                                        <li>
+                                            <a href="/Fulfillment/PurchaseOrderInvoice"><i class="bx bx-right-arrow-alt"></i>Po Invoice</a>
+                                        </li>
+
+                                    </ul>
+
+                                </li>
+
+                                <li>
+                                    <a href="javascript:" title="Application Intel" data-filter-tags="application intel" id="container">
+                                        <span class="nav-link-text" data-i18n="nav.application_intel">Stock</span>
+                                        <div class="list-icon"><i id="icon" class="fa fa-angle-down" aria-hidden="true"></i></div>
+                                    </a>
+                                    <ul>
+                                        <li>
+                                            <a href="/Fulfillment/StockEntry"><i class="bx bx-right-arrow-alt"></i>Stock Entry</a>
+                                        </li>
+                                        <li>
+                                            <a href="/Fulfillment/FulStockAvaialbe"><i class="bx bx-right-arrow-alt"></i>Stock Details</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="javascript:" title="Application Intel" data-filter-tags="application intel" id="container">
+                                        <span class="nav-link-text" data-i18n="nav.application_intel">Po Recive</span>
+                                        <div class="list-icon"><i id="icon" class="fa fa-angle-down" aria-hidden="true"></i></div>
+                                    </a>
+                                    <ul>
+                                        <li>
+                                            <a href="/Fulfillment/Ordertrack"><i class="bx bx-right-arrow-alt"></i>Order Receive</a>
+                                        </li>
+                                        
+                                    </ul>
+                                </li>
+                            }
+                        }
                     </ul>
                     <div class="filter-message js-filter-message bg-success-600"></div>
                 </nav>
