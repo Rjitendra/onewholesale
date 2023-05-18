@@ -2,7 +2,7 @@
 {
     using OneWholeSale.Model.Dto.SalesPerson;
     using OneWholeSale.Service.Utility;
-    public interface ISalesService
+    public interface ISalesPersonService
     {
         Task<Result<SalesPersonDto>> GetSalesPerson(int id);
         Task<Result<bool>> AddSalesPerson(SalesPersonDto dto);
