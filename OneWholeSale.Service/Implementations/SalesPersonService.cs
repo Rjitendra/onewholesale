@@ -128,11 +128,22 @@
                 {
                     return Result<bool>.NotFound();
                 }
+
                 // need to implement
                 //  if sales person associate with other group,then we can not delete untill we discontinue sales person in other group
                 var salesPerson = await this.Db.SalesPerson.Where(x => x.Id == id).SingleOrDefaultAsync();
+
+                var applicationUser = await this.Db.Users
+                                                   .Where(a => a.Id == id).SingleOrDefaultAsync();
+                if (applicationUser != null)
+                {
+                    bool res = UserService.DeleteApplicationUser(applicationUser.Id);
+                }
+
+
                 this.Db.SalesPerson.Remove(salesPerson);
                 await this.Db.SaveChangesAsync();
+
                 return Result<bool>.Success(true);
             }
             catch (Exception ex) { return Result<bool>.Failure("Error in Deleting Sales Person"); }
