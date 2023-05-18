@@ -27,7 +27,7 @@
         }
 
         /// <summary>
-        ///Add Sales Person
+        ///Update Sales Person
         /// </summary>
         /// <param name="dto"></param>
         /// <returns></returns>
@@ -49,7 +49,7 @@
         }
 
         /// <summary>
-        ///Get Sales Person by Id
+        ///Delete Sales Person
         /// </summary>
         /// <param name="dto"></param>
         /// <returns></returns>
