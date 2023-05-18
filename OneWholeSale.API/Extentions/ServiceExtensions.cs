@@ -7,7 +7,7 @@
         public static void ConfigureDIServices(this IServiceCollection services)
         {
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddSingleton<ISalesPersonService, SalesPersonService>();
+            services.AddTransient<ISalesPersonService, SalesPersonService>();
         }
     }
 }
