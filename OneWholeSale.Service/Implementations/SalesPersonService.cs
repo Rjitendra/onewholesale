@@ -5,8 +5,10 @@
     using Microsoft.EntityFrameworkCore;
     using OneWholeSale.Model.Context;
     using OneWholeSale.Model.Dto.SalesPerson;
+    using OneWholeSale.Model.Entity.SalesPerson;
     using OneWholeSale.Service.Interfaces;
     using OneWholeSale.Service.Utility;
+    using System.Net.Sockets;
     using System.Threading.Tasks;
 
     public class SalesPersonService : ISalesPersonService
@@ -37,18 +39,55 @@
             }
             catch (Exception ex) { return Result<SalesPersonDto>.Failure("Error in getting Sales Person"); }
         }
-        public Task<Result<bool>> AddSalesPerson(SalesPersonDto dto)
+        public async Task<Result<bool>> AddSalesPerson(SalesPersonDto dto)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var result = _mapper.Map<SalesPerson>(dto);
+                // Add the ticket to the DbContext's Ticket DbSet.
+                await this.Db.SalesPerson.AddAsync(result);
+
+                // Save the changes to the database.
+                await this.Db.SaveChangesAsync();
+
+                // Return a Result object indicating success and a value of true.
+                return Result<bool>.Success(true);
+            }
+            catch (Exception ex) { return Result<bool>.Failure("Error in Adding Sales Person"); }
         }
 
-        public Task<Result<bool>> DeleteSalesPerson(int id)
+        public async Task<Result<bool>> DeleteSalesPerson(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                if (id == 0)
+                {
+                    return Result<bool>.NotFound();
+                }
+                // need to implement
+                //  if sales person associate with other group,then we can not delete untill we discontinue sales person in other group
+                var salesPerson = await this.Db.SalesPerson.Where(x => x.Id == id).SingleOrDefaultAsync();
+                this.Db.SalesPerson.Remove(salesPerson);
+                await this.Db.SaveChangesAsync();
+                return Result<bool>.Success(true);
+            }
+            catch (Exception ex) { return Result<bool>.Failure("Error in Deleting Sales Person"); }
         }
-        public Task<Result<bool>> UpdateSalesPerson(SalesPersonDto dto)
+        public async Task<Result<bool>> UpdateSalesPerson(SalesPersonDto dto)
         {
-            throw new NotImplementedException();
+
+            try
+            {
+                var salesPerson = _mapper.Map<SalesPerson>(dto);
+                
+               
+                await this.Db.SaveChangesAsync();
+                return Result<bool>.Success(true);
+            }
+            catch (Exception ex)
+            {
+                return Result<bool>.Failure("Error in Updating Sales Person");
+            }
         }
     }
 }
