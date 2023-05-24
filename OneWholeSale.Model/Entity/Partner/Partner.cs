@@ -1,9 +1,10 @@
-﻿namespace OneWholeSale.Model.Entity.FullFillCenter
+﻿
+namespace OneWholeSale.Model.Entity.Partner
 {
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    [Table("FullFillmentCenter", Schema = "dbo")]
-    public class FullFillmentCenter
+    [Table("Partner", Schema = "dbo")]
+    public class Partner
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -14,15 +15,19 @@
         public string ContactPerson { get; set; }
         public string ContactNumber { get; set; }
         public string Email { get; set; }
-        public string Country { get; set; }
-        public string State { get; set; }
-        public string FCCode { get; set; }
+       
+        public string PartnerCode { get; set; }
+        public int FulfillmentCenterId { get; set; }
+        
+
         public DateTime Addon { get; set; }
         public int AddBy { get; set; }
         public DateTime? ModOn { get; set; }
         public string? ModBy { get; set; }
-        public bool IsActive { get; set; }
-        public bool IsDelete { get; set; }
+        public bool Is_Active { get; set; }
+        public bool Is_Delete { get; set; }
+        public int AssignedSalesPeronId { get; set; }
+        
 
     }
 }

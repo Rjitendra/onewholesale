@@ -6,6 +6,7 @@
     using OneWholeSale.Model.Context;
     using OneWholeSale.Model.Dto;
     using OneWholeSale.Model.Dto.SalesPerson;
+    using OneWholeSale.Model.Entity.Master;
     using OneWholeSale.Model.Entity.SalesPerson;
     using OneWholeSale.Model.Enums;
     using OneWholeSale.Service.Interfaces;
@@ -37,7 +38,7 @@
         {
             try
             {
-                var salesPerson = this.Db.SalesPerson.Where(x => x.Id == id).SingleOrDefaultAsync();
+                var salesPerson = await this.Db.SalesPerson.Where(x => x.Id == id).SingleOrDefaultAsync();
 
                 var result = _mapper.Map<SalesPersonDto>(salesPerson);
                 return Result<SalesPersonDto>.Success(result);
@@ -50,6 +51,8 @@
             {
                 try
                 {
+                    dto.AddOn = DateTime.Now;
+                    dto.SalesPersonCode = SalesPerson_Code();
                     // get all roles
                     var roleList = await this.UserService.Roles();
 
@@ -107,12 +110,10 @@
 
                     transaction.Rollback();
 
-                    var applicationUser = await this.Db.Users
-                                                    .Where(a => a.UserName == dto.Email || a.Email == dto.Email).SingleOrDefaultAsync();
+                    var applicationUser = await this.Db.Users.Where(a => a.UserName == dto.Email || a.Email == dto.Email).SingleOrDefaultAsync();
                     if (applicationUser != null)
                     {
                         bool res = UserService.DeleteApplicationUser(applicationUser.Id);
-
                         return Result<bool>.Failure("Failed to create Sales Person");
                     }
                     return Result<bool>.Failure("Failed to create Sales Person");
@@ -132,36 +133,102 @@
                 // need to implement
                 //  if sales person associate with other group,then we can not delete untill we discontinue sales person in other group
                 var salesPerson = await this.Db.SalesPerson.Where(x => x.Id == id).SingleOrDefaultAsync();
-
-                var applicationUser = await this.Db.Users
-                                                   .Where(a => a.Id == id).SingleOrDefaultAsync();
+                var applicationUser = await this.Db.Users.Where(a => a.Id == id).SingleOrDefaultAsync();
                 if (applicationUser != null)
                 {
                     bool res = UserService.DeleteApplicationUser(applicationUser.Id);
                 }
-
-
                 this.Db.SalesPerson.Remove(salesPerson);
                 await this.Db.SaveChangesAsync();
-
                 return Result<bool>.Success(true);
             }
-            catch (Exception ex) { return Result<bool>.Failure("Error in Deleting Sales Person"); }
+            catch (Exception ex) { 
+                return Result<bool>.Failure("Error in Deleting Sales Person"); 
+            }
         }
         public async Task<Result<bool>> UpdateSalesPerson(SalesPersonDto dto)
         {
-
             try
             {
+
                 var salesPerson = _mapper.Map<SalesPerson>(dto);
 
+                this.Db.SalesPerson.Attach(salesPerson);
+                this.Db.Entry(salesPerson).State = EntityState.Modified;
 
                 await this.Db.SaveChangesAsync();
+
                 return Result<bool>.Success(true);
             }
             catch (Exception ex)
             {
                 return Result<bool>.Failure("Error in Updating Sales Person");
+            }
+        }
+
+
+        public string SalesPerson_Code()
+        {
+
+            var data = Db.SalesPerson.ToList().Count ;
+
+
+            string data2 = "";
+            if (data == 0)
+            {
+                int id = 1;
+
+
+                data2 = "SalesPerson-" + id;
+            }
+            else
+            {
+                int id = data + 1;
+                data2 = "SalesPerson-" + id;
+            }
+            return data2;
+        }
+
+        public List<District> Districtlist()
+        {
+            var data = Db.District.ToList();
+
+            return data;
+        }
+
+        public async Task<Result<List<District>>> GetDistrict_List()
+        {
+            try
+            {
+                var data = await Db.District.ToListAsync();
+                return Result<List<District>>.Success(data);
+            }
+            catch (Exception ex)
+            {
+                // Handle any exceptions and return an error result
+                return Result<List<District>>.Failure("Failed to retrieve salespersons: " + ex.Message);
+            }
+        }
+
+
+
+        public List<Vw_SalesPerson> SalesPersonList()
+        {
+            var data = Db.Vw_SalesPerson.ToList();
+
+            return data;
+        }
+        public async Task<Result<List<Vw_SalesPerson>>> GetSalesPersonsonList()
+        {
+            try
+            {
+                var data = await Db.Vw_SalesPerson.ToListAsync();
+                return Result<List<Vw_SalesPerson>>.Success(data);
+            }
+            catch (Exception ex)
+            {
+                // Handle any exceptions and return an error result
+                return Result<List<Vw_SalesPerson>>.Failure("Failed to retrieve salespersons: " + ex.Message);
             }
         }
     }

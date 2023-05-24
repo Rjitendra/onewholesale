@@ -1,4 +1,4 @@
-﻿
+﻿@model OneWholeSale.Model.Dto.SalesPerson.SalesPersonDto
 @{
     ViewData["Title"] = "SalesPersonDetails";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -24,7 +24,32 @@
                 <div class="loader"><i class="fal fa-spinner-third fa-spin-4x fs-xxl"></i></div>
                 <div class="row mb-3">
                     <div class="col-md-12">
-                        <form action="" method="post">
+                        <form method="post" action="/Admin/SalesPersonDetails">
+
+                            @{
+                                string confirmMessage = Convert.ToString(TempData["Msg"]); string warningMessage = Convert.ToString(TempData["WMsg"]);
+                            }
+                            @if (!string.IsNullOrEmpty(confirmMessage))
+                            {
+                                <div class="alert alert-success alert-dismissable" id="divSuccessMessage">
+                                    <input type="hidden" id="messagealert" value="@confirmMessage" />
+                                    @confirmMessage
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                </div>
+                            }
+                            else if (!string.IsNullOrEmpty(warningMessage))
+                            {
+                                <div class="alert alert-warning alert-dismissable" id="divSuccessMessage">
+                                    <input type="hidden" id="messagealert" value="@warningMessage" />
+                                    @warningMessage
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                </div>
+                            }
+                            else
+                            {
+                                <input type="hidden" id="messagealert" value="0" />
+                            }
+
 
                             <div class="panel-content">
                                 <div class="frame-wrap">
@@ -41,26 +66,24 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label class="form-label" for="example-select">Country: </label>
-
-                                                    <select class="form-select form-control">
-                                                        <option value="India">India</option>
-                                                    </select>
+                                                    @Html.HiddenFor(x => x.Id)
+                                                    @Html.DropDownListFor(x => x.Country, (IEnumerable<SelectListItem>)ViewBag.Country, new { @class = "form-select form-control", @id = "Country" })
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <label class="form-label" for="example-select">State: </label>
-                                                <select class="form-select form-control">
+                                                
+                                                @Html.DropDownListFor(x => x.State, (IEnumerable<SelectListItem>)ViewBag.state, new { @class = "form-select form-control", @id = "State" })
+
+                                              @*  <select class="form-select form-control">
                                                     <option value="Odisha">Odisha</option>
                                                     
-                                                </select>
+                                                </select>*@
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label class="form-label" for="example-select">District: </label>
-                                                    <select class="form-select form-control">
-                                                        <option value="Khorda">Khorda</option>
-                                                        <option value="Cuttack">Cuttack</option>
-                                                    </select>
+                                                    @Html.DropDownListFor(x => x.District, (IEnumerable<SelectListItem>) ViewBag.District, new { @class = "form-select form-control", @id = "District" })
                                                 </div>
                                             </div>
                                         </div>
@@ -68,22 +91,35 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label class="form-label" for="example-select">Name: </label>
-                                                    <input type="text" class="form-control" />
+                                                    @Html.TextBoxFor(x=>x.Name,new{@class="form-control"})
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <label class="form-label" for="example-select">Contact No: </label>
-                                                <input type="text" class="form-control" />
+                                                @Html.TextBoxFor(x=>x.ContactNumber,new{@class="form-control"})
 
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label class="form-label" for="example-select">Email: </label>
-                                                    <input type="text" class="form-control" />
+                                                    @Html.TextBoxFor(x=>x.Email,new{@class="form-control"})
                                                 </div>
                                             </div>
                                         </div>
-                                       
+                                       <div class="row mt-3">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="form-label" for="example-select">Address: </label>
+                                                    @Html.TextBoxFor(x=>x.Address,new{@class="form-control"})
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="form-label" for="example-select">Contact Person: </label>
+                                                    @Html.TextBoxFor(x=>x.ContactPerson,new{@class="form-control"})
+                                                </div>
+                                            </div>
+                                       </div>
                                         <div class="row mt-3">
                                             <div class="col-md-8">
                                             </div>
@@ -123,27 +159,37 @@
                                 <th style="color: #ffffff;">Sl No</th>
                                 <th style="color: #ffffff;">Country</th>
                                 <th style="color: #ffffff;">State</th>
-                                <th style="color: #ffffff;">District</th>
+                                <th style="color: #ffffff;">District Name</th>
                                 <th style="color: #ffffff;">Name</th>
-                                <th style="color: #ffffff;">Contact</th>
-                                <th style="color: #ffffff;">Email</th>
+                                @*<th style="color: #ffffff;">Email</th>*@
+                                <th style="color: #ffffff;">Address</th>
+                             @*   <th style="color: #ffffff;">Contact Person</th>*@
                                 <th style="color: #ffffff;">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>India</td>
-                                <td>Odisha</td>
-                                <td>Khurda</td>
-                                <td>Name</td>
-                                <td>Contact</td>
-                                <td>Email</td>
-                                <td>
-                                    <a href=""><i class="fal fa-pencil" style="color:blue;"></i></a>
-                                    <a href=""><i class="fal fa-trash" style="color:red;padding-left:12px;"></i></a>
-                                </td>
-                            </tr>
+                             @if ( ViewBag.SalesPerson != null)
+                            {
+                                int count = 0;
+                                foreach (var item in  ViewBag.SalesPerson)
+                                {
+                                    count = count + 1;
+                                <tr>
+                                    <td>@count</td>
+                                    <td>@item.Country</td>
+                                    <td>@item.State</td>
+                                    <td>@item.DistrictName</td>
+                                    <td>@item.Name</td>
+                                   @* <td>@item.Email</td>*@
+                                    <td>@item.Address</td>
+                                  @*  <td>@item.ContactPerson</td>*@
+                                    <td>
+                                            <a href="/Admin/Get?id=@item.Id"><i class="fal fa-pencil" style="color:blue;"></i></a>
+                                            <a href="/Admin/Delete?id=@item.Id"><i class="fal fa-trash" style="color:red;padding-left:12px;"></i></a>
+                                    </td>
+                                </tr>
+                                }
+                            }
                         </tbody>
                     </table>
                 </div>

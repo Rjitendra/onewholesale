@@ -7,11 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Implementations\" />
-    <Folder Include="Interfaces\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\OneWholeSale.Model\OneWholeSale.Model.csproj" />
   </ItemGroup>
 
