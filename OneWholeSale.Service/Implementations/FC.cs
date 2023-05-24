@@ -166,7 +166,7 @@ namespace OneWholeSale.Service.Implementations
             }
             catch (Exception ex)
             {
-                return Result<bool>.Failure("Error in Deleting Fulfillment Center);
+                return Result<bool>.Failure("Error in Deleting Fulfillment Center");
                 }
         }
 

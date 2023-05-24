@@ -12,6 +12,7 @@ namespace OneWholeSale.Service.Interfaces
     public interface IFC
     {
 
+         Task<Result<bool>> DeleteFc(int id);
         Task<Result<bool>> AddNewFC(FullFillmentCenterDto dto);
     }
 }
