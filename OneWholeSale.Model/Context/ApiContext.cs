@@ -4,7 +4,10 @@
     using Microsoft.EntityFrameworkCore;
     using OneWholeSale.Model.Entity;
     using OneWholeSale.Model.Entity.FullFillCenter;
+    using OneWholeSale.Model.Entity.Master;
+    using OneWholeSale.Model.Entity.Partner;
     using OneWholeSale.Model.Entity.SalesPerson;
+    using System.Collections.Generic;
 
     public class ApiContext : IdentityDbContext<ApplicationUser, ApplicationUserIdentityRole, int>
     {
@@ -19,6 +22,12 @@
         public virtual DbSet<SalesPerson> SalesPerson { get; set; }
         public virtual DbSet<FullFillmentCenter> FullFillmentCenter { get; set; }
         public virtual DbSet<MapSalesPersonToFC> MapSalesPersonToFC { get; set; }
+        public virtual DbSet<District> District { get; set; }
+
+        public virtual DbSet<Vw_SalesPerson> Vw_SalesPerson { get; set; }
+        public virtual DbSet<MapDistrictToFc> MapDistrictToFc { get; set; }
+        public virtual DbSet<Partner> Partner { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
