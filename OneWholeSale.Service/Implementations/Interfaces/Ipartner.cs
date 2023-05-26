@@ -1,5 +1,7 @@
-﻿using OneWholeSale.Model.Dto.Partner;
+﻿using OneWholeSale.Model.Dto.FC;
+using OneWholeSale.Model.Dto.Partner;
 using OneWholeSale.Model.Dto.SalesPerson;
+using OneWholeSale.Model.Entity.FullFillCenter;
 using OneWholeSale.Model.Entity.Partner;
 using OneWholeSale.Service.Utility;
 using System;
@@ -16,5 +18,8 @@ namespace OneWholeSale.Service.Interfaces
         Task<Result<bool>> AddPartner(PartnerDto dto);
         Task<Result<bool>> UpdatePartner(PartnerDto dto);
         Task<Result<bool>> DeletePartner(int id);
+        //string PartnerCode();
+        Task<Result<List<FullFillmentCenter>>> GetFulfilmentCenter();
+        Task<Result<List<Partner>>> GetpartnerList();
     }
 }

@@ -1,10 +1,11 @@
 ﻿
-namespace OneWholeSale.Model.Entity.Partner
+
+namespace OneWholeSale.Model.Entity.Kirana
 {
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    [Table("Partner", Schema = "dbo")]
-    public class Partner
+    [Table("Kirana", Schema = "dbo")]
+    public  class Kirana
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -12,22 +13,20 @@ namespace OneWholeSale.Model.Entity.Partner
         public int UserId { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
-    
+        public string ContactPerson { get; set; }
         public string ContactNumber { get; set; }
         public string Email { get; set; }
-       
-        public string PartnerCode { get; set; }
-        public int FulfillmentCenterId { get; set; }
-        
+
+        public string KiranaCode { get; set; }
+        public int PartnerId { get; set; }
+
 
         public DateTime Addon { get; set; }
-        public int AddBy { get; set; }
+        public string AddBy { get; set; }
         public DateTime? ModOn { get; set; }
         public string? ModBy { get; set; }
         public bool Is_Active { get; set; }
         public bool Is_Delete { get; set; }
-        public int AssignedSalesPeronId { get; set; }
-        
 
     }
 }

@@ -18,7 +18,7 @@ namespace OneWholeSale.Model.Entity.SalesPerson
         public string Country { get; set; }
         public string State { get; set; }
         public int District { get; set; }
-        public DateTime? Addon { get; set; }
+        public DateTime AddOn { get; set; }
 
         public bool? IsActive { get; set; }
         public string SalesPersonCode { get; set; }

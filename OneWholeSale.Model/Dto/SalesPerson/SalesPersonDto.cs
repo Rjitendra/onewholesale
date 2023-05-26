@@ -10,7 +10,7 @@
         public string Email { get; set; }
         public string Country { get; set; }
         public string State { get; set; }
-        public string District { get; set; }
+        public int District { get; set; }
         public string SalesPersonCode { get; set; }
         public DateTime AddOn { get; set; }
         public int AddBy { get; set; }
