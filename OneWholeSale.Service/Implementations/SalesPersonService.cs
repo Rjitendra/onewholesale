@@ -166,6 +166,28 @@
             }
         }
 
+        public string SalesPerson_Code()
+        {
+
+            var data = Db.SalesPerson.ToList().Count ;
+
+
+            string data2 = "";
+            if (data == 0)
+            {
+                int id = 1;
+
+
+                data2 = "SalesPerson-" + id;
+            }
+            else
+            {
+                int id = data + 1;
+                data2 = "SalesPerson-" + id;
+            }
+            return data2;
+        }
+
 
         public string SalesPerson_Code()
         {
