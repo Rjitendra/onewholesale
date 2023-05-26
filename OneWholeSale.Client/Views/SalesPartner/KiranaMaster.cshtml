@@ -1,4 +1,4 @@
-﻿
+﻿@model OneWholeSale.Model.Dto.KiranaDto
 @{
     ViewData["Title"] = "KiranaMaster";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -22,7 +22,30 @@
                 <div class="loader"><i class="fal fa-spinner-third fa-spin-4x fs-xxl"></i></div>
                 <div class="row mb-3">
                     <div class="col-md-12">
-                        <form action="" method="post">
+                        <form action="/SalesPartner/KiranaMaster" method="post">
+                            @{
+                                string confirmMessage = Convert.ToString(TempData["Msg"]); string warningMessage = Convert.ToString(TempData["WMsg"]);
+                            }
+                            @if (!string.IsNullOrEmpty(confirmMessage))
+                            {
+                                <div class="alert alert-success alert-dismissable" id="divSuccessMessage">
+                                    <input type="hidden" id="messagealert" value="@confirmMessage" />
+                                    @confirmMessage
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                </div>
+                            }
+                            else if (!string.IsNullOrEmpty(warningMessage))
+                            {
+                                <div class="alert alert-warning alert-dismissable" id="divSuccessMessage">
+                                    <input type="hidden" id="messagealert" value="@warningMessage" />
+                                    @warningMessage
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                </div>
+                            }
+                            else
+                            {
+                                <input type="hidden" id="messagealert" value="0" />
+                            }
                             <div class="panel-content">
                                 <div class="frame-wrap">
                                     <div class="card p-3">
@@ -34,45 +57,39 @@
                                         </div>
                                         <div class="row mb-2 mt-3">
                                             <div class="col-md-3">
-                                                <label class="form-label" for="example-select">Kirana Code: </label>
-                                                <input type="text" class="form-control" value="KN001" readonly />
-                                            </div>
-                                            <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label class="form-label" for="example-select">Partner: </label>
-                                                    <select class="form-select form-control">
-                                                        <option value="India">ABC</option>
-                                                    </select>
+                                                    @Html.HiddenFor(x => x.Id)
+                                                    @Html.DropDownListFor(x => x.PartnerId,(IEnumerable<SelectListItem>)ViewBag.partner, new { @class = "form-select form-control", @id = "Partner" })
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
                                                 <label class="form-label" for="example-select">Kirana Name: </label>
-                                                <input type="text" class="form-control" />
+                                                @Html.TextBoxFor(x=>x.Name,new{@class="form-control", @id = "KiranaName"})
+                                            </div>
+                                         
+                                            <div class="col-md-3">
+                                                 <div class="form-group">
+                                                     <label class="form-label" for="example-select">Kirana Number: </label>
+                                                      @Html.TextBoxFor(x=>x.ContactNumber,new{@class="form-control", @id = "ContactNumber"})
+                                                 </div>
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-group">
-                                                    <label class="form-label" for="example-select">Kirana Number: </label>
-                                                    <input type="text" class="form-control" />
+                                                    <label class="form-label" for="example-select">Kirana Email: </label>
+                                                    @Html.TextBoxFor(x=>x.Email,new{@class="form-control", @id = "Email"})
                                                 </div>
                                             </div>
-                                            
                                         </div>
                                         <div class="row mb-2 mt-3">
                                             <div class="col-md-3">
                                                 <div class="form-group">
-                                                    <label class="form-label" for="example-select">Kirana Email: </label>
-                                                    <input type="text" class="form-control" />
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <div class="form-group">
                                                     <label class="form-label" for="example-select">Address: </label>
-                                                    <input type="text" class="form-control" height="50" width="50" />
+                                                    @Html.TextAreaFor(x=>x.Address,new{@class="form-control", @id = "Address"})
                                                 </div>
                                             </div>
                                         </div>
-
-                                        <div class="row mt-3">
+                                        <div class="row mt-3 ">
                                             <div class="col-md-8">
                                             </div>
                                             <div class="col-md-4">
@@ -84,7 +101,7 @@
                                 </div>
                             </div>
                         </form>
-                    </div>
+                     </div>
                 </div>
             </div>
         </div>
@@ -93,12 +110,13 @@
 
 
 
+
 <div class="row">
     <div class="col-xl-12">
         <div id="panel-1" class="panel">
             <div class="panel-hdr">
                 <h2>
-                    Sales Person Details <span class="fw-300"><i>List</i></span>
+                    Kirana Details <span class="fw-300"><i>List</i></span>
                 </h2>
             </div>
 
@@ -118,18 +136,26 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>KN001</td>
-                                <td>KName</td>
-                                <td>Contact</td>
-                                <td>Email</td>
-                                <td>Address</td>
-                                <td>
-                                    <a href=""><i class="fal fa-pencil" style="color:blue;"></i></a>
-                                    <a href=""><i class="fal fa-trash" style="color:red;padding-left:12px;"></i></a>
-                                </td>
-                            </tr>
+                            @if (ViewBag.KiranaList != null)
+                            {
+                                int count = 0;
+                                foreach (var item in ViewBag.KiranaList)
+                                {
+                                    count = count + 1;
+                                    <tr>
+                                        <td>@count</td>
+                                        <td>@item.KiranaCode</td>
+                                        <td>@item.Name</td>
+                                        <td>@item.ContactNumber</td>
+                                        <td>@item.Email</td>
+                                        <td>@item.Address</td>
+                                        <td>
+                                            <a href="/SalesPartner/KiranaMaster?id=@item.Id"><i class="fal fa-pencil" style="color:blue;"></i></a>
+                                            <a href="/SalesPartner/DeleteKirana?id=@item.Id"><i class="fal fa-trash" style="color:red;padding-left:12px;"></i></a>
+                                        </td>
+                                    </tr>
+                                }
+                            }
                         </tbody>
                     </table>
                 </div>

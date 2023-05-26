@@ -2,16 +2,16 @@
 {
     public enum ApplicationUserRole
     {
-        None = 0,
+        None = 1,
 
-        Admin = 1,
+        Admin = 2,
 
-        FulfillmentCenter = 2,
+        FulfillmentCenter = 3,
 
-        Partner = 3,
+        Partner = 4,
 
-        Kirana = 4,
+        Kirana = 5,
 
-        SalesPerson= 5
+        SalesPerson = 6
     }
 }

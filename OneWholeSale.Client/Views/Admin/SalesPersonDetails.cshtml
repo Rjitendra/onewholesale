@@ -110,7 +110,7 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label class="form-label" for="example-select">Address: </label>
-                                                    @Html.TextBoxFor(x=>x.Address,new{@class="form-control"})
+                                                    @Html.TextAreaFor(x=>x.Address,new{@class="form-control"})
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
@@ -163,6 +163,7 @@
                                 <th style="color: #ffffff;">Name</th>
                                 @*<th style="color: #ffffff;">Email</th>*@
                                 <th style="color: #ffffff;">Address</th>
+                               
                              @*   <th style="color: #ffffff;">Contact Person</th>*@
                                 <th style="color: #ffffff;">Action</th>
                             </tr>
@@ -180,11 +181,11 @@
                                     <td>@item.State</td>
                                     <td>@item.DistrictName</td>
                                     <td>@item.Name</td>
-                                   @* <td>@item.Email</td>*@
+                                  
                                     <td>@item.Address</td>
-                                  @*  <td>@item.ContactPerson</td>*@
+                                   
                                     <td>
-                                            <a href="/Admin/Get?id=@item.Id"><i class="fal fa-pencil" style="color:blue;"></i></a>
+                                            <a href="/Admin/SalesPersonDetails?id=@item.Id"><i class="fal fa-pencil" style="color:blue;"></i></a>
                                             <a href="/Admin/Delete?id=@item.Id"><i class="fal fa-trash" style="color:red;padding-left:12px;"></i></a>
                                     </td>
                                 </tr>

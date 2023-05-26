@@ -147,52 +147,48 @@
                     </div> -->
                     <ul id="js-nav-menu" class="nav-menu">
                         @{
-                                if (roleName.ToString()=="Admin")
-                                {
-                    <li>
-                        <a href="/Home/Dashboard">
-                            <div class="menu-title">Dashboard</div>
-                        </a>
-                    </li>
-                        <li>
-                            
+                            if (roleName.ToString()=="Admin")
+                            {
+                                <li>
+                                    <a href="/Home/Dashboard">
+                                        <div class="menu-title">Dashboard</div>
+                                    </a>
+                                </li>
+                                <li>
+                                   <a href="javascript:" title="Application Intel" data-filter-tags="application intel" id="container">
+                                       <span class="nav-link-text" data-i18n="nav.application_intel">Master</span>
+                                       <div class="list-icon"><i id="icon" class="fa fa-angle-down" aria-hidden="true"></i></div>
+                                   </a>
+                                   <ul>
+                                      
+                                       <li>
+                                           <a href="/Admin/SalesPersonDetails"><i class="bx bx-right-arrow-alt"></i>Sales Person Details</a>
+                                       </li>
+                                       <li>
+                                           <a href="/Admin/FulfilmentCenter"><i class="bx bx-right-arrow-alt"></i>Fulfilment Center</a>
+                                       </li>
+                                   </ul>
+                                  </li>
+                                <li>
                                     <a href="javascript:" title="Application Intel" data-filter-tags="application intel" id="container">
-                                        <span class="nav-link-text" data-i18n="nav.application_intel">Master</span>
+                                        <span class="nav-link-text" data-i18n="nav.application_intel">Vendor</span>
                                         <div class="list-icon"><i id="icon" class="fa fa-angle-down" aria-hidden="true"></i></div>
                                     </a>
                                     <ul>
-                                       
                                         <li>
-                                            <a href="/Admin/SalesPersonDetails"><i class="bx bx-right-arrow-alt"></i>Sales Person Details</a>
+                                                <a href="/Admin/VendorContactPerson"><i class="bx bx-right-arrow-alt"></i>Contact Person</a>
                                         </li>
                                         <li>
-                                            <a href="/Admin/FulfilmentCenter"><i class="bx bx-right-arrow-alt"></i>Fulfilment Center</a>
+                                            <a href="/Admin/VendorCategory"><i class="bx bx-right-arrow-alt"></i>Category</a>
                                         </li>
-                                       
+                                        <li>
+                                                <a href="/Admin/VendorSubCategory"><i class="bx bx-right-arrow-alt"></i>Sub-Category</a>
+                                        </li>
+                                        <li>
+                                                <a href="/Admin/Product"><i class="bx bx-right-arrow-alt"></i>Product</a>
+                                        </li>
                                     </ul>
-                           
-                        </li>
-                      
-                    <li>
-                        <a href="javascript:" title="Application Intel" data-filter-tags="application intel" id="container">
-                            <span class="nav-link-text" data-i18n="nav.application_intel">Vendor</span>
-                            <div class="list-icon"><i id="icon" class="fa fa-angle-down" aria-hidden="true"></i></div>
-                        </a>
-                        <ul>
-                            <li>
-                                    <a href="/Admin/VendorContactPerson"><i class="bx bx-right-arrow-alt"></i>Contact Person</a>
-                            </li>
-                            <li>
-                                <a href="/Admin/VendorCategory"><i class="bx bx-right-arrow-alt"></i>Category</a>
-                            </li>
-                            <li>
-                                    <a href="/Admin/VendorSubCategory"><i class="bx bx-right-arrow-alt"></i>Sub-Category</a>
-                            </li>
-                            <li>
-                                    <a href="/Admin/Product"><i class="bx bx-right-arrow-alt"></i>Product</a>
-                            </li>
-                        </ul>
-                    </li>
+                                </li>
                             }
                         }
                         @{
@@ -250,6 +246,36 @@
                                 </li>
                             }
                         }
+                        @*@{
+                            else if (roleName.ToString() == "SalesPerson")
+                            {
+                                <li>
+                                    <a href="/Home/Dashboard">
+                                        <div class="menu-title">Dashboard</div>
+                                    </a>
+                                </li>
+                                <li>
+
+                                    <a href="javascript:" title="Application Intel" data-filter-tags="application intel" id="container">
+                                        <span class="nav-link-text" data-i18n="nav.application_intel">Sales Partner Master</span>
+                                        <div class="list-icon"><i id="icon" class="fa fa-angle-down" aria-hidden="true"></i></div>
+                                    </a>
+                                    <ul>
+
+                                        <li>
+                                            <a href="/SalesPartner/Partner"><i class="bx bx-right-arrow-alt"></i>Partner</a>
+                                        </li>
+                                        <li>
+                                            <a href="/SalesPartner/KiranaMaster"><i class="bx bx-right-arrow-alt"></i>Kirana master</a>
+                                        </li>
+
+                                    </ul>
+
+                                </li>
+
+                                
+                            }
+                        }*@
                     </ul>
                     <div class="filter-message js-filter-message bg-success-600"></div>
                 </nav>

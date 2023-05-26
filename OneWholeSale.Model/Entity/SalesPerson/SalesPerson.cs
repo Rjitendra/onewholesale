@@ -14,11 +14,13 @@
         public string ContactPerson { get; set; }
         public string ContactNumber { get; set; }
         public string Email { get; set; }
-        public int Country { get; set; }
-        public int State { get; set; }
+
+        public string Country { get; set; }
+        public string State { get; set; }
+
         public int District { get; set; }
         public string SalesPersonCode { get; set; }
-        public DateTime AddOn { get; set; }
+        public DateTime Addon { get; set; }
         public int AddBy { get; set; }
         public DateTime? ModOn { get; set; }
         public int? ModBy { get; set; }

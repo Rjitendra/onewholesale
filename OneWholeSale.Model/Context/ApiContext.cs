@@ -4,6 +4,7 @@
     using Microsoft.EntityFrameworkCore;
     using OneWholeSale.Model.Entity;
     using OneWholeSale.Model.Entity.FullFillCenter;
+    using OneWholeSale.Model.Entity.Kirana;
     using OneWholeSale.Model.Entity.Master;
     using OneWholeSale.Model.Entity.Partner;
     using OneWholeSale.Model.Entity.SalesPerson;
@@ -27,6 +28,7 @@
         public virtual DbSet<Vw_SalesPerson> Vw_SalesPerson { get; set; }
         public virtual DbSet<MapDistrictToFc> MapDistrictToFc { get; set; }
         public virtual DbSet<Partner> Partner { get; set; }
+        public virtual DbSet<Kirana> Kirana { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

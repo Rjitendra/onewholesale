@@ -42,9 +42,6 @@ namespace OneWholeSale.Client.Controllers
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokenvalue);
                 var tokenResponse = await httpClient.GetAsync(tokenEndpoint);
                 var tokenContent = await tokenResponse.Content.ReadAsStringAsync();
-
-
-               
                 var districtresponse = await httpClient.GetAsync(districtapi);
                 var districtContent = await districtresponse.Content.ReadAsStringAsync();
                 List<SelectListItem> li = new List<SelectListItem>();
@@ -60,9 +57,7 @@ namespace OneWholeSale.Client.Controllers
                     Value = "India",
                 });
 
-
                 ViewBag.Country = li;
-
 
                 List<SelectListItem> li11 = new List<SelectListItem>();
 
@@ -77,8 +72,6 @@ namespace OneWholeSale.Client.Controllers
                     Value = "Odisha",
                 });
                 ViewBag.state = li11;
-               
-
                 if (tokenResponse.IsSuccessStatusCode && districtresponse.IsSuccessStatusCode) 
                 {
                     var tokenObject = JObject.Parse(tokenContent);
@@ -88,32 +81,24 @@ namespace OneWholeSale.Client.Controllers
                     var districtArray = districtObject["entity"];
 
                     List<SelectListItem> li1 = new List<SelectListItem>();
-                    li1.Add(new SelectListItem { Text = "--Select Occupation--", Value = "0" });
+                    li1.Add(new SelectListItem { Text = "--Select District--", Value = "0" });
 
                     foreach (var item in districtArray)
                     {
                         var districtName = (string)item["districtName"];
                         var districtid = (int)item["id"];
-
                         li1.Add(new SelectListItem
                         {
                             Text = districtName,
                             Value = districtid.ToString()
                         });
                     }
-
                     ViewBag.District = li1;
-
-                   
                     var salesPersonList = entityArray.ToObject<List<Vw_SalesPerson>>();
                     ViewBag.SalesPerson = salesPersonList;
-
-                   
-
                 }
-                if(id==0|| id == null)
+                if(id == 0|| id == null)
                 {
-
                     return View();
                 }
                 else  
@@ -123,13 +108,10 @@ namespace OneWholeSale.Client.Controllers
                     if (result is JsonResult jsonResult)
                     {
                         salesPerson = jsonResult.Value as SalesPersonDto;
-
-
                     }
                     return View(salesPerson);
                 }
             }
-           
             else
             {
                 return RedirectToAction("Login", "Account");
@@ -189,7 +171,7 @@ namespace OneWholeSale.Client.Controllers
         [HttpPost]
         public async Task<IActionResult> SalesPersonDetails(SalesPersonDto dto)
         {
-            if (dto .Id== null)
+            if (dto .Id== null || dto.Id == 0)
             {
                 dto.SalesPersonCode = "";
           
@@ -217,8 +199,7 @@ namespace OneWholeSale.Client.Controllers
             }
             else
             {
-                dto.SalesPersonCode = "";
-
+               
                 var tokenClaim = HttpContext.User.Claims.FirstOrDefault(c => c.Type == "access_token");
                 var tokenValue = tokenClaim?.Value;
 
